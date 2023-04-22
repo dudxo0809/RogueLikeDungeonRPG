@@ -16,7 +16,7 @@ void UMainMenu::NativeConstruct()
 	m_NewGameBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("NewGame_Btn"))));
 	m_ContinueBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("Continue_Btn"))));
 	m_EndGameBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("EndGame_Btn"))));
-
+	m_InfiniteBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("Infinite_Btn"))));
 
 	m_SaveSlotBtnArray.Add(Cast<UButton>(GetWidgetFromName(FName(TEXT("SaveSlotBtn1")))));
 	m_SaveSlotBtnArray.Add(Cast<UButton>(GetWidgetFromName(FName(TEXT("SaveSlotBtn2")))));
@@ -36,6 +36,10 @@ void UMainMenu::NativeConstruct()
 	m_NewGameBtn->OnClicked.AddDynamic(this, &UMainMenu::OnNewGameBtnClicked);
 	m_ContinueBtn->OnClicked.AddDynamic(this, &UMainMenu::OnContinueBtnClicked);
 	m_EndGameBtn->OnClicked.AddDynamic(this, &UMainMenu::OnEndGameBtnClicked);
+	m_InfiniteBtn->OnClicked.AddDynamic(this, &UMainMenu::OnInfiniteBtnClicked);
+	
+
+
 
 	m_SaveSlotBtnArray[0]->OnClicked.AddDynamic(this, &UMainMenu::OnSaveSlot1BtnClicked);
 	m_SaveSlotBtnArray[1]->OnClicked.AddDynamic(this, &UMainMenu::OnSaveSlot2BtnClicked);
@@ -122,6 +126,12 @@ void UMainMenu::OnEndGameBtnClicked()
 	UGameplayStatics::GetGameInstance(GetWorld());
 	
 	UKismetSystemLibrary::QuitGame(GetWorld(), nullptr, EQuitPreference::Quit, false);
+
+}
+
+void UMainMenu::OnInfiniteBtnClicked()
+{
+
 
 }
 

@@ -24,6 +24,7 @@ private:
 	UButton* m_NewGameBtn;
 	UButton* m_ContinueBtn;
 	UButton* m_EndGameBtn;
+	UButton* m_InfiniteBtn;
 
 
 private:
@@ -52,6 +53,9 @@ public:
 
 	UFUNCTION()
 		void OnEndGameBtnClicked();
+
+	UFUNCTION()
+		void OnInfiniteBtnClicked();
 
 
 public:
