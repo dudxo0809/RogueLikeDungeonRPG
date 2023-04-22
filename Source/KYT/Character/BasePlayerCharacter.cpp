@@ -623,12 +623,35 @@ void ABasePlayerCharacter::LevelUp()
 				bAddUpgradeInfo = false;
 
 			// Arcane Type의 속성을 Max로 강화해야 새로운 속성을 강화할 수 있음
-			if (Info->AttributeType != EPlayerAttribute::Arcane) {
+			if (Info->AttributeType == EPlayerAttribute::Fire ||
+				Info->AttributeType == EPlayerAttribute::Ice || 
+				Info->AttributeType == EPlayerAttribute::Thunder || 
+				Info->AttributeType == EPlayerAttribute::Poison) {
 
 				if (mInfo.PlayerAttributeLevel[(int32)EPlayerAttribute::Arcane] < mInfo.PlayerAttributeMaxLevel[(int32)EPlayerAttribute::Arcane])
 					bAddUpgradeInfo = false;
 			}
 
+			// Fire, Ice, Thunder, Poison 중 하나를 Max강화해야 Holy, Shadow 강화가능
+			else if (Info->AttributeType == EPlayerAttribute::Holy ||
+				Info->AttributeType == EPlayerAttribute::Shadow) {
+
+				if (mInfo.PlayerAttributeLevel[(int32)EPlayerAttribute::Fire] < mInfo.PlayerAttributeMaxLevel[(int32)EPlayerAttribute::Fire] && 
+					mInfo.PlayerAttributeLevel[(int32)EPlayerAttribute::Ice] < mInfo.PlayerAttributeMaxLevel[(int32)EPlayerAttribute::Ice] &&
+					mInfo.PlayerAttributeLevel[(int32)EPlayerAttribute::Thunder] < mInfo.PlayerAttributeMaxLevel[(int32)EPlayerAttribute::Thunder] &&
+					mInfo.PlayerAttributeLevel[(int32)EPlayerAttribute::Poison] < mInfo.PlayerAttributeMaxLevel[(int32)EPlayerAttribute::Poison])
+
+					bAddUpgradeInfo = false;
+			}
+
+			// Holy, Shadow 중 하나를 Max강화해야 Void강화가능
+			else if (Info->AttributeType == EPlayerAttribute::Void) {
+
+				if (mInfo.PlayerAttributeLevel[(int32)EPlayerAttribute::Holy] < mInfo.PlayerAttributeMaxLevel[(int32)EPlayerAttribute::Holy] &&
+					mInfo.PlayerAttributeLevel[(int32)EPlayerAttribute::Shadow] < mInfo.PlayerAttributeMaxLevel[(int32)EPlayerAttribute::Shadow])
+
+					bAddUpgradeInfo = false;
+			}
 		}
 
 		// Projectile 강화
