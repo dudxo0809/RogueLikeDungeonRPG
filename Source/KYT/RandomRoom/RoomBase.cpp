@@ -125,7 +125,7 @@ void ARoomBase::SetWallStaticMeshOff(int32 Dir)
 
 		mWall_E->SetStaticMesh(mGate);
 
-		mWall_E->SetRelativeScale3D(FVector(0.25, 0.25, 1));
+		mWall_E->SetRelativeScale3D(FVector(0.25, 0.25, 0.7));
 		mWall_E->SetRelativeLocation(FVector(400, -510, 0));
 		mWall_E->SetRelativeRotation(FRotator(0, 90, 0));
 
@@ -136,7 +136,7 @@ void ARoomBase::SetWallStaticMeshOff(int32 Dir)
 
 		mWall_W->SetStaticMesh(mGate);
 
-		mWall_W->SetRelativeScale3D(FVector(0.25, 0.25, 1));
+		mWall_W->SetRelativeScale3D(FVector(0.25, 0.25, 0.7));
 		mWall_W->SetRelativeLocation(FVector(-400, 510, 0));
 		mWall_W->SetRelativeRotation(FRotator(0, -90, 0));
 
@@ -147,7 +147,7 @@ void ARoomBase::SetWallStaticMeshOff(int32 Dir)
 
 		mWall_N->SetStaticMesh(mGate);
 
-		mWall_N->SetRelativeScale3D(FVector(0.25, 0.25, 1));
+		mWall_N->SetRelativeScale3D(FVector(0.25, 0.25, 0.7));
 		mWall_N->SetRelativeLocation(FVector(-510, -400, 0));
 		mWall_N->SetRelativeRotation(FRotator(0, 0, 0));
 
@@ -158,7 +158,7 @@ void ARoomBase::SetWallStaticMeshOff(int32 Dir)
 
 		mWall_S->SetStaticMesh(mGate);
 
-		mWall_S->SetRelativeScale3D(FVector(0.25, 0.25, 1));
+		mWall_S->SetRelativeScale3D(FVector(0.25, 0.25, 0.7));
 		mWall_S->SetRelativeLocation(FVector(510, 400, 0));
 		mWall_S->SetRelativeRotation(FRotator(0, -180, 0));
 
