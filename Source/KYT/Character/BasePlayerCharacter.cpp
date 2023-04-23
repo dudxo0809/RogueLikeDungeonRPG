@@ -613,6 +613,14 @@ void ABasePlayerCharacter::LevelUp()
 		else if (!(mInfo.PlayerClass == Info->LimitPlayerClass || Info->LimitPlayerClass == E_Player_Class::None))
 			bAddUpgradeInfo = false;
 
+
+		// 기본 능력치 강화
+		else if (Info->IsBasic) 
+		{
+
+		}
+
+
 		// 속성 강화
 		else if (Info->IsAttribute) 
 		{

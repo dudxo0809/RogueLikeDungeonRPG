@@ -269,6 +269,13 @@ void UPlayerLevelUp::OnOkBtnClicked()
 
 	FPlayerSkillUpgradeInfo UpgradeInfo = mPlayerSkillUpgradeArray[ChoiceSkillIndex];
 
+	// Basic 타입
+	if(UpgradeInfo.IsBasic)
+	{
+		
+	}
+
+
 	// 속성강화 타입
 	if (UpgradeInfo.IsAttribute) 
 	{
