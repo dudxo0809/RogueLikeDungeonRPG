@@ -78,6 +78,14 @@ void ABaseMonster::BeginPlay()
 
 	if (TableInfo)
 	{
+		// Set Monster Level first
+		int32 LevelOffset = FMath::RandRange(0, 3);
+
+		mInfo.Level = TableInfo->Level * MonsterAbilityScale + LevelOffset;
+
+		// Set Monster Ability based on Monster Level
+		MonsterAbilityScale += 0.3 * mInfo.Level;
+
 		mInfo.Name = TableInfo->Name;
 		mInfo.AttackPoint = TableInfo->AttackPoint * MonsterAbilityScale;
 		mInfo.ArmorPoint = TableInfo->ArmorPoint * MonsterAbilityScale;
@@ -86,9 +94,9 @@ void ABaseMonster::BeginPlay()
 		mInfo.MP = TableInfo->MP * MonsterAbilityScale;
 		mInfo.MPMax = TableInfo->MP * MonsterAbilityScale;
 
-		int32 LevelOffset = FMath::RandRange(0, 3);
+		
 
-		mInfo.Level = TableInfo->Level * MonsterAbilityScale + LevelOffset;
+		
 		mInfo.Exp = TableInfo->Exp * MonsterAbilityScale;
 		mInfo.Gold = TableInfo->Gold;
 		mInfo.MoveSpeed = TableInfo->MoveSpeed;
@@ -237,7 +245,7 @@ float ABaseMonster::TakeDamage(float DamageAmount, FDamageEvent const& DamageEve
 		mExpProjectile->SetSpeed(1.f);
 		mExpProjectile->SetHoming(false);
 
-		float ExpScale = 1.0f + (mStageNum * 0.15f);
+		float ExpScale = 1.0f + (mStageNum * 0.5f);
 
 		mExpProjectile->SetExp(mInfo.Exp * ExpScale);
 
