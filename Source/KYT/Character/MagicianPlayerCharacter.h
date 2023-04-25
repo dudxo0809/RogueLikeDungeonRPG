@@ -64,7 +64,7 @@ public:
 
 	virtual void Dash();
 
-
+	bool CheckTeleport(FVector& TeleportLocation);
 
 public:
 

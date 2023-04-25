@@ -10,6 +10,8 @@
 #include "PlayerAnimInstance.h"
 #include "BasePlayerController.h"
 
+#include "../RandomRoom/RoomBase.h"
+
 
 AMagicianPlayerCharacter::AMagicianPlayerCharacter()
 {
@@ -505,15 +507,11 @@ void AMagicianPlayerCharacter::Dash()
 
 	mDashCurrentCoolTime = 0.f;
 
-	FVector TeleportDir;
-	float Degree = GetActorRotation().Yaw + mMoveDir;
-	float Radian = FMath::DegreesToRadians(Degree);
+	// Caculate Teleport Location
+	FVector TeleportLocation;
 
-	float dx = FMath::Cos(Radian) * 500.f;
-	float dy = FMath::Sin(Radian) * 500.f;
-
-	FVector TeleportLocation = FVector(GetActorLocation().X + dx, GetActorLocation().Y + dy, GetActorLocation().Z);
-
+	if (!CheckTeleport(TeleportLocation))
+		return;
 
 	// Effect
 	FActorSpawnParameters	SpawnParam;
@@ -524,11 +522,11 @@ void AMagicianPlayerCharacter::Dash()
 			GetActorRotation(),
 			SpawnParam);
 
-	Particle->SetParticle(TEXT("ParticleSystem'/Game/ParagonPhase/FX/Particles/Abilities/Flash/FX/P_PhaseFlash.P_PhaseFlash'"));
+	Particle->SetParticle(TEXT("ParticleSystem'/Game/ParagonPhase/FX/Particles/Abilities/Ultimate/FX/P_PhaseUltEnd.P_PhaseUltEnd'"));
 	Particle->SetSound(TEXT("SoundWave'/Game/UltimateMagicUE/wav/Buffs/Buff_-_Simple_Shimmer_2.Buff_-_Simple_Shimmer_2'"));
 	Particle->SetSoundVolumeScale(0.5f);
 
-	Particle->SetActorScale3D(FVector(0.3f, 0.3f, 0.3f));
+	Particle->SetActorScale3D(FVector(2.f, 2.f, 2.f));
 
 	
 
@@ -547,6 +545,58 @@ void AMagicianPlayerCharacter::Dash()
 	//Particle2->SetSoundVolumeScale(0.5f);
 
 	Particle2->SetActorScale3D(FVector(0.3f, 0.3f, 0.3f));
+}
+
+bool AMagicianPlayerCharacter::CheckTeleport(FVector& TeleportLocation)
+{
+	bool bCheckTeleport = false;;
+
+	FVector TeleportDir;
+
+	float Degree = GetActorRotation().Yaw + mMoveDir;
+	float Radian = FMath::DegreesToRadians(Degree);
+
+	float dx = FMath::Cos(Radian) * 500.f;
+	float dy = FMath::Sin(Radian) * 500.f;
+
+
+	TeleportLocation = FVector(GetActorLocation().X + dx, GetActorLocation().Y + dy, GetActorLocation().Z);
+
+	FCollisionQueryParams	param(NAME_None, false, this);
+
+	FHitResult	CollisionResult;
+	bool CollisionEnable = GetWorld()->SweepSingleByChannel(
+		CollisionResult, TeleportLocation,
+		TeleportLocation, FQuat::Identity,
+		ECollisionChannel::ECC_GameTraceChannel3,				// MonsterAttack
+		FCollisionShape::MakeSphere(50.f),
+		param);
+
+
+	ARoomBase* HitRoom = Cast<ARoomBase>(CollisionResult.GetActor());
+
+	if (IsValid(HitRoom))
+		return bCheckTeleport;	// false;
+
+	TArray<FHitResult> CollisionResultArray;
+
+	CollisionEnable = GetWorld()->SweepMultiByChannel(
+		CollisionResultArray, TeleportLocation,
+		TeleportLocation, FQuat::Identity,
+		ECollisionChannel::ECC_GameTraceChannel3,				// MonsterAttack
+		FCollisionShape::MakeCapsule(50, 300),
+		param);
+
+
+	for (auto i : CollisionResultArray) {
+
+		HitRoom = Cast<ARoomBase>(i.GetActor());
+		
+		if (IsValid(HitRoom))
+			bCheckTeleport = true;
+	}
+
+	return bCheckTeleport;
 }
 
 void AMagicianPlayerCharacter::LevelUp()
