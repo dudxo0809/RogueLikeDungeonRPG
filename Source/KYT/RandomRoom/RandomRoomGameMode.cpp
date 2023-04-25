@@ -267,9 +267,26 @@ UDungeonSaveGame* ARandomRoomGameMode::CreateSaveGame()
 	MySaveGame->mPlayerInfo.PlayerAttributeMaxLevel = MyPlayer->GetPlayerInfo().PlayerAttributeMaxLevel;
 
 
+	// Baisic Upgrade Info
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.bIsExp = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.bIsExp;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.bIsHP = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.bIsHP;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.bIsMP = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.bIsMP;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.bIsArmor = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.bIsArmor;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.mExpLevel = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mExpLevel;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.mExpMaxLevel = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mExpMaxLevel;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.mHPLevel = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mHPLevel;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.mHPMaxLevel = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mHPMaxLevel;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.mMPLevel = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mMPLevel;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.mMPMaxLevel = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mMPMaxLevel;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.mArmorLevel = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mArmorLevel;
+	MySaveGame->mPlayerInfo.BasicUpgradeInfo.mArmorMaxLevel = MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mArmorMaxLevel;
+
+
 	//Projectile
 	MySaveGame->mPlayerInfo.ProjectileInfo.mHoming = MyPlayer->GetPlayerInfo().ProjectileInfo.mHoming;
 	MySaveGame->mPlayerInfo.ProjectileInfo.mDuplicate = MyPlayer->GetPlayerInfo().ProjectileInfo.mDuplicate;
+	MySaveGame->mPlayerInfo.ProjectileInfo.mDuplicateProbability = MyPlayer->GetPlayerInfo().ProjectileInfo.mDuplicateProbability;
+	MySaveGame->mPlayerInfo.ProjectileInfo.mMaxDuplicateProbability = MyPlayer->GetPlayerInfo().ProjectileInfo.mMaxDuplicateProbability;
 	MySaveGame->mPlayerInfo.ProjectileInfo.mDuplicateCount = MyPlayer->GetPlayerInfo().ProjectileInfo.mDuplicateCount;
 	MySaveGame->mPlayerInfo.ProjectileInfo.mMaxDuplicateCount = MyPlayer->GetPlayerInfo().ProjectileInfo.mMaxDuplicateCount;
 	MySaveGame->mPlayerInfo.ProjectileInfo.mProjectileSpeed = MyPlayer->GetPlayerInfo().ProjectileInfo.mProjectileSpeed;
@@ -333,9 +350,26 @@ void ARandomRoomGameMode::SaveGame(int32 SaveIndex)
 		*Writer << mSaveGame->mPlayerInfo.PlayerAttributeLevel;
 		*Writer << mSaveGame->mPlayerInfo.PlayerAttributeMaxLevel;
 
+		// Baisic Upgrade Info
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.bIsExp;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.bIsHP;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.bIsMP;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.bIsArmor;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.mExpLevel;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.mExpMaxLevel;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.mHPLevel;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.mHPMaxLevel;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.mMPLevel;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.mMPMaxLevel;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.mArmorLevel;
+		*Writer << mSaveGame->mPlayerInfo.BasicUpgradeInfo.mArmorMaxLevel;
+
+
 		//Projectile
 		*Writer << mSaveGame->mPlayerInfo.ProjectileInfo.mHoming;
 		*Writer << mSaveGame->mPlayerInfo.ProjectileInfo.mDuplicate;
+		*Writer << mSaveGame->mPlayerInfo.ProjectileInfo.mDuplicateProbability;
+		*Writer << mSaveGame->mPlayerInfo.ProjectileInfo.mMaxDuplicateProbability;
 		*Writer << mSaveGame->mPlayerInfo.ProjectileInfo.mDuplicateCount;
 		*Writer << mSaveGame->mPlayerInfo.ProjectileInfo.mMaxDuplicateCount;
 		*Writer << mSaveGame->mPlayerInfo.ProjectileInfo.mProjectileSpeed;

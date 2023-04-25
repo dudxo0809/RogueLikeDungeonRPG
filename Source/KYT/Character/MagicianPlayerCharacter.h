@@ -85,6 +85,16 @@ public:
 		mInfo.ProjectileInfo.mDuplicate = bDuplicate;
 	}
 
+	float GetProjectileDuplicateProbability() {
+
+		return mInfo.ProjectileInfo.mDuplicateProbability;
+	}
+
+	void SetProjectileDuplicateProbability(float Probability) {
+
+		mInfo.ProjectileInfo.mDuplicateProbability = Probability;
+	}
+
 	int32 GetProjectileDuplicateCount() {
 
 		return mInfo.ProjectileInfo.mDuplicateCount;

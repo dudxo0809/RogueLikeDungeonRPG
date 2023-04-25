@@ -43,6 +43,52 @@ enum class E_Status_Reinforce : uint8 {
 
 
 
+USTRUCT(BlueprintType)
+struct FBasicUpgradeInfo
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		bool bIsExp = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		bool bIsHP = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		bool bIsMP = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		bool bIsArmor = false;
+
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		int32 mExpLevel = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		int32 mExpMaxLevel = 20;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		int32 mHPLevel = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		int32 mHPMaxLevel = 10;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		int32 mMPLevel = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		int32 mMPMaxLevel = 10;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		int32 mArmorLevel = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		int32 mArmorMaxLevel = 10;
+
+};
+
 
 // FPlayerSkillUpgradeInfo 
 // 
@@ -95,6 +141,9 @@ public:
 		EPlayerAttribute AttributeType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		FBasicUpgradeInfo BasicUpgradeInfo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		bool IsProjectileSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
@@ -108,6 +157,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		bool IsProjectileDuplicate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		bool IsProjectileDuplicateProbability;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		bool IsProjectileDuplicateCount;
@@ -156,6 +208,10 @@ public:
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		FBasicUpgradeInfo BasicUpgradeInfo;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		bool IsProjectileSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
@@ -169,6 +225,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		bool IsProjectileDuplicate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		bool IsProjectileDuplicateProbability;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		bool IsProjectileDuplicateCount;
@@ -192,6 +251,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		bool mDuplicate = false;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		float mDuplicateProbability = 15.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		float mMaxDuplicateProbability = 75.f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		int32 mDuplicateCount = 1;
 
@@ -202,7 +268,7 @@ public:
 		float mProjectileSpeed = 500;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
-		float mMaxProjectileSpeed = 1500;
+		float mMaxProjectileSpeed = 1000;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		float mProjectileScale = 1.f;
@@ -220,8 +286,6 @@ public:
 		float mMaxProjectileDamageScale = 2.5f;
 
 };
-
-
 
 
 
@@ -301,6 +365,11 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		TArray<int32> PlayerAttributeMaxLevel;
+
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		FBasicUpgradeInfo BasicUpgradeInfo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		FProjectileInfo ProjectileInfo;
@@ -383,6 +452,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		TArray<int32> PlayerAttributeMaxLevel;
 
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		FBasicUpgradeInfo BasicUpgradeInfo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		FProjectileInfo ProjectileInfo;

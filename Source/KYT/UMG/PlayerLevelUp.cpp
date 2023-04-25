@@ -306,6 +306,14 @@ void UPlayerLevelUp::OnOkBtnClicked()
 				MyMagician->SetDuplicate(true);
 			}
 
+			else if (UpgradeInfo.IsProjectileDuplicateProbability)
+			{
+				float BefProb = MyMagician->GetProjectileDuplicateProbability();
+				float NewProb = BefProb + UpgradeInfo.IncreaseValue_float;
+
+				MyMagician->SetProjectileDuplicateProbability(NewProb);
+			}
+
 			else if (UpgradeInfo.IsProjectileSpeed)
 			{
 				float BeforeSpeed = MyMagician->GetProjectileSpeed();

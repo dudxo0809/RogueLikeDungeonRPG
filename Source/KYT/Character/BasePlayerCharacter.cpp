@@ -55,10 +55,8 @@ ABasePlayerCharacter::ABasePlayerCharacter() :
 	mSkillEffectAttributeIndex = 0;
 
 	mSkillEnable.Empty();
-	mSkillEnable.Add(true);
-	mSkillEnable.Add(false);
-	mSkillEnable.Add(false);
-	mSkillEnable.Add(false);
+
+	mSkillEnable = { 1,0,0,0 };
 	
 	
 	mSceneCapture2D = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("SceneCapture2D"));
@@ -132,10 +130,28 @@ void ABasePlayerCharacter::BeginPlay()
 		*Reader.Get() << mInfo.PlayerAttribute;
 		*Reader.Get() << mInfo.PlayerAttributeLevel;
 		*Reader.Get() << mInfo.PlayerAttributeMaxLevel;
+		
+
+		// Baisic Upgrade Info
+		*Reader.Get() << mInfo.BasicUpgradeInfo.bIsExp;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.bIsHP;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.bIsMP;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.bIsArmor;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.mExpLevel;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.mExpMaxLevel;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.mHPLevel;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.mHPMaxLevel;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.mMPLevel;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.mMPMaxLevel;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.mArmorLevel;
+		*Reader.Get() << mInfo.BasicUpgradeInfo.mArmorMaxLevel;
+
 
 		//Projectile
 		*Reader.Get() << mInfo.ProjectileInfo.mHoming;
 		*Reader.Get() << mInfo.ProjectileInfo.mDuplicate;
+		*Reader.Get() << mInfo.ProjectileInfo.mDuplicateProbability;
+		*Reader.Get() << mInfo.ProjectileInfo.mMaxDuplicateProbability;
 		*Reader.Get() << mInfo.ProjectileInfo.mDuplicateCount;
 		*Reader.Get() << mInfo.ProjectileInfo.mMaxDuplicateCount;
 		*Reader.Get() << mInfo.ProjectileInfo.mProjectileSpeed;
@@ -181,6 +197,8 @@ void ABasePlayerCharacter::BeginPlay()
 		mInfo.PlayerAttributeMaxLevel = Info->PlayerAttributeMaxLevel;
 
 		mInfo.Mesh = Info->Mesh;
+
+		mInfo.BasicUpgradeInfo = Info->BasicUpgradeInfo;
 
 		mInfo.ProjectileInfo = Info->ProjectileInfo;
 
@@ -674,6 +692,15 @@ void ABasePlayerCharacter::LevelUp()
 			else if(Info->IsProjectileDuplicate)
 			{
 				if (mInfo.ProjectileInfo.mDuplicate)
+					bAddUpgradeInfo = false;
+
+			}
+			else if(Info->IsProjectileDuplicateProbability)
+			{
+				if (mInfo.ProjectileInfo.mDuplicate == false)
+					bAddUpgradeInfo = false;
+
+				if (mInfo.ProjectileInfo.mDuplicateProbability >= mInfo.ProjectileInfo.mMaxDuplicateProbability)
 					bAddUpgradeInfo = false;
 
 			}
