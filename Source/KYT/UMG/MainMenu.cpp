@@ -131,7 +131,15 @@ void UMainMenu::OnEndGameBtnClicked()
 
 void UMainMenu::OnInfiniteBtnClicked()
 {
+	UKYTGameInstance* MyGameInst = Cast<UKYTGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	if (IsValid(MyGameInst)) {
 
+		// Set Save Index to GameInstance
+		MyGameInst->SetCurrentSaveIndex(m_SelectedSaveSlotIndex);
+
+		// Open Level
+		UGameplayStatics::OpenLevel(GetWorld(), TEXT("Infinite"));
+	}
 
 }
 

@@ -24,6 +24,19 @@ public:
 
 private:
 
-	TSubclassOf<ARoomBase>	m_RoomInitClass;
-	ARoomBase* mRoomInit;
+	TSubclassOf<ARoomBase>	m_RoomInfiniteClass;
+	ARoomBase* mRoomInfinite;
+
+
+
+public:
+	virtual void BeginPlay()	override;
+
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason)override;
+
+	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage);
+	virtual void PostLogin(APlayerController* NewPlayer);
+	virtual void Tick(float DeltaTime)	override;
+
+
 };
