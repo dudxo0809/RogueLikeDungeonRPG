@@ -5,6 +5,7 @@
 
 #include "../KYTGameInstance.h"
 #include "../Skill/Projectile.h"
+#include "../Skill/ParticleCascade.h"
 
 #include "PlayerAnimInstance.h"
 #include "BasePlayerController.h"
@@ -34,6 +35,9 @@ AMagicianPlayerCharacter::AMagicianPlayerCharacter()
 	mNormalAttackVolume = 0.5f;
 	mSkillVolume = 0.5f;
 
+	mDashCoolTime = 1.f;
+	mDashCurrentCoolTime = 0.f;
+
 }
 
 void AMagicianPlayerCharacter::BeginPlay()
@@ -58,7 +62,7 @@ void AMagicianPlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-
+	mDashCurrentCoolTime += DeltaTime;
 }
 
 void AMagicianPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -488,6 +492,61 @@ void AMagicianPlayerCharacter::Skill4()
 
 		mAnimInst->UseSkill(3);
 	}
+}
+
+void AMagicianPlayerCharacter::Dash()
+{
+
+	if (mMoveForwardDir == 0.f && mMoveDir == 0.f)
+		return;
+
+	if (mDashCurrentCoolTime <= mDashCoolTime)
+		return;
+
+	mDashCurrentCoolTime = 0.f;
+
+	FVector TeleportDir;
+	float Degree = GetActorRotation().Yaw + mMoveDir;
+	float Radian = FMath::DegreesToRadians(Degree);
+
+	float dx = FMath::Cos(Radian) * 500.f;
+	float dy = FMath::Sin(Radian) * 500.f;
+
+	FVector TeleportLocation = FVector(GetActorLocation().X + dx, GetActorLocation().Y + dy, GetActorLocation().Z);
+
+
+	// Effect
+	FActorSpawnParameters	SpawnParam;
+
+	AParticleCascade* Particle =
+		GetWorld()->SpawnActor<AParticleCascade>(
+			GetActorLocation(),
+			GetActorRotation(),
+			SpawnParam);
+
+	Particle->SetParticle(TEXT("ParticleSystem'/Game/ParagonPhase/FX/Particles/Abilities/Flash/FX/P_PhaseFlash.P_PhaseFlash'"));
+	Particle->SetSound(TEXT("SoundWave'/Game/UltimateMagicUE/wav/Buffs/Buff_-_Simple_Shimmer_2.Buff_-_Simple_Shimmer_2'"));
+	Particle->SetSoundVolumeScale(0.5f);
+
+	Particle->SetActorScale3D(FVector(0.3f, 0.3f, 0.3f));
+
+	
+
+	// Teleport
+	SetActorLocation(TeleportLocation);
+
+	// Effect After Teleport
+	AParticleCascade* Particle2 =
+		GetWorld()->SpawnActor<AParticleCascade>(
+			GetActorLocation(),
+			GetActorRotation(),
+			SpawnParam);
+
+	Particle2->SetParticle(TEXT("ParticleSystem'/Game/ParagonPhase/FX/Particles/Abilities/Flash/FX/P_PhaseFlash.P_PhaseFlash'"));
+	//Particle2->SetSound(TEXT("SoundWave'/Game/UltimateMagicUE/wav/Buffs/Buff_-_Simple_Shimmer_2.Buff_-_Simple_Shimmer_2'"));
+	//Particle2->SetSoundVolumeScale(0.5f);
+
+	Particle2->SetActorScale3D(FVector(0.3f, 0.3f, 0.3f));
 }
 
 void AMagicianPlayerCharacter::LevelUp()

@@ -62,6 +62,9 @@ public:
 	virtual void Skill3();
 	virtual void Skill4();
 
+	virtual void Dash();
+
+
 
 public:
 

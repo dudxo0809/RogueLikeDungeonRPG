@@ -15,7 +15,7 @@
 
 
 ABasePlayerCharacter::ABasePlayerCharacter() :
-	mMoveDir(0.f),
+	mMoveForwardDir(0.f),
 	mDeath(false),
 	mHitActor(nullptr),
 	mWeapon(nullptr)
@@ -30,7 +30,7 @@ ABasePlayerCharacter::ABasePlayerCharacter() :
 	// Camera 컴포넌트를 SpringArm 컴포넌트의 자식 컴포넌트로 붙여준다.
 	mCamera->SetupAttachment(mSpringArm);
 
-	mSpringArm->TargetArmLength = 2000.f;
+	mSpringArm->TargetArmLength = 1500.f;
 
 	mSpringArm->SetRelativeLocation(FVector(0.0, 0.0, 160.0));
 	mSpringArm->SetRelativeRotation(FRotator(300.0, 90.0, 0));
@@ -290,6 +290,9 @@ void ABasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		&ABasePlayerCharacter::Skill4);
 
 
+	PlayerInputComponent->BindAction<ABasePlayerCharacter>(TEXT("Dash"),
+		EInputEvent::IE_Pressed, this,
+		&ABasePlayerCharacter::Dash);
 
 
 	PlayerInputComponent->BindAction<ABasePlayerCharacter>(TEXT("PlayerInfoMenu"),
@@ -310,7 +313,7 @@ void ABasePlayerCharacter::MoveForward(float Scale)
 	if (!mMovable)
 		return;
 
-	mMoveDir = Scale;
+	mMoveForwardDir = Scale;
 
 	if (Scale == 0.f)
 		return;
@@ -329,49 +332,61 @@ void ABasePlayerCharacter::MoveSide(float Scale)
 	if (!mMovable)
 		return;
 	
-	if (mMoveDir == 1.f)
+	if (mMoveForwardDir == 1.f)
 	{
 		// w키를 누른 상태에서 a, d는 없는 상태.
-		if (Scale == 0.f)
+		if (Scale == 0.f) {
 			mAnimInst->SetMoveDir(0.f);
-
+			mMoveDir = 0.f;
+		}
 		// w키를 누른 상태에서 오른쪽으로 이동.
-		else if (Scale == 1.f)
+		else if (Scale == 1.f) {
 			mAnimInst->SetMoveDir(45.f);
-
+			mMoveDir = 45.f;
+		}
 		// w키를 누른 상태에서 왼쪽으로 이동.
-		else if (Scale == -1.f)
+		else if (Scale == -1.f) {
 			mAnimInst->SetMoveDir(-45.f);
+			mMoveDir = -45.f;
+		}
 	}
 
-	else if (mMoveDir == -1.f)
+	else if (mMoveForwardDir == -1.f)
 	{
 		// s키를 누른 상태에서 a, d는 없는 상태.
-		if (Scale == 0.f)
+		if (Scale == 0.f) {
 			mAnimInst->SetMoveDir(180.f);
-
+			mMoveDir = 180.f;
+		}
 		// s키를 누른 상태에서 오른쪽으로 이동.
-		else if (Scale == 1.f)
+		else if (Scale == 1.f) {
 			mAnimInst->SetMoveDir(135.f);
-
+			mMoveDir = 135.f;
+		}
 		// s키를 누른 상태에서 왼쪽으로 이동.
-		else if (Scale == -1.f)
+		else if (Scale == -1.f) {
 			mAnimInst->SetMoveDir(-135.f);
+			mMoveDir = -135.f;
+		}
 	}
 
 	else
 	{
 		// 아무 키도 누른게 없을 경우
-		if (Scale == 0.f)
+		if (Scale == 0.f) {
 			mAnimInst->SetMoveDir(0.f);
-
+			mMoveDir = 0.f;
+		}
 		// 오른쪽으로 이동.
-		else if (Scale == 1.f)
+		else if (Scale == 1.f) {
 			mAnimInst->SetMoveDir(90.f);
-
+			mMoveDir = 90.f;
+		}
 		// 왼쪽으로 이동.
-		else if (Scale == -1.f)
+		else if (Scale == -1.f) {
 			mAnimInst->SetMoveDir(-90.f);
+			mMoveDir = -90.f;
+		}
 	}
 
 	if (Scale == 0.f)
@@ -578,6 +593,10 @@ void ABasePlayerCharacter::Skill3()
 }
 
 void ABasePlayerCharacter::Skill4()
+{
+}
+
+void ABasePlayerCharacter::Dash()
 {
 }
 
@@ -875,7 +894,7 @@ void ABasePlayerCharacter::SyncPlayerStatus()
 // Ctrl
 void ABasePlayerCharacter::Test()
 {
-
+	/*
 	ARandomRoomGameMode* MyGameMode = Cast<ARandomRoomGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 
 	if (!IsValid(MyGameMode))
@@ -889,4 +908,6 @@ void ABasePlayerCharacter::Test()
 	else
 		MainHUD->HidePlayerLevelUp();
 
+
+	*/
 }

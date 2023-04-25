@@ -42,7 +42,12 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Component, meta = (AllowPrivateAccess = true))
 	UMaterial* mMinimapMaterial;
 	
+	//Move & Dash
+	float	mMoveForwardDir;
 	float	mMoveDir;
+
+	float	mDashCoolTime;
+	float	mDashCurrentCoolTime;
 
 	class UPlayerAnimInstance* mAnimInst;
 	bool	mDeath;
@@ -166,6 +171,10 @@ public:
 	virtual void Skill2();
 	virtual void Skill3();
 	virtual void Skill4();
+
+	virtual void Dash();
+
+
 
 	virtual void GetExp(float Exp);
 	virtual void LevelUp();
