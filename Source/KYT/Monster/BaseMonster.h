@@ -109,6 +109,7 @@ public:
 		return mAttackEnd; 
 	}
 
+	
 	class UMonsterAnimInstance* GetMonsterAnimInst() const { 
 		
 		return mAnimInst; 

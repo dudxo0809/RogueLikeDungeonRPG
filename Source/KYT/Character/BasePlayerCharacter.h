@@ -54,7 +54,6 @@ protected:
 
 	AActor* mHitActor;
 
-	
 
 	class AWeaponActor* mWeapon;
 
@@ -117,6 +116,11 @@ public:
 		return mInfo;
 	}
 
+	void SetPlayerInfo(FPlayerCharacterInfo Info) {
+
+		mInfo = Info;
+	}
+
 
 	UCameraComponent* GetCamera() {
 
@@ -151,6 +155,9 @@ public:
 		mInfo.PlayerAttributeLevel[(int32)PlayerAttribute] = Level;
 	}
 
+
+
+public:
 
 
 	void PlayerLevelUpScreen();

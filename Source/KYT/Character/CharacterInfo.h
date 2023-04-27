@@ -64,25 +64,25 @@ public:
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
-		int32 mExpLevel = 1;
+		int32 mExpLevel = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		int32 mExpMaxLevel = 20;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
-		int32 mHPLevel = 1;
+		int32 mHPLevel = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		int32 mHPMaxLevel = 10;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
-		int32 mMPLevel = 1;
+		int32 mMPLevel = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		int32 mMPMaxLevel = 10;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
-		int32 mArmorLevel = 1;
+		int32 mArmorLevel = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		int32 mArmorMaxLevel = 10;

@@ -588,7 +588,7 @@ bool AMagicianPlayerCharacter::CheckTeleport(FVector& TeleportLocation)
 		param);
 
 
-	for (auto i : CollisionResultArray) {
+	for (const auto& i : CollisionResultArray) {
 
 		HitRoom = Cast<ARoomBase>(i.GetActor());
 		

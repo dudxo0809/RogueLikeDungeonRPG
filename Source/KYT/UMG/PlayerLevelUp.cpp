@@ -272,7 +272,49 @@ void UPlayerLevelUp::OnOkBtnClicked()
 	// Basic е╦ют
 	if(UpgradeInfo.IsBasic)
 	{
-		
+		ABasePlayerCharacter* MyPlayer = Cast<ABasePlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+		if (IsValid(MyPlayer))
+		{
+			if (UpgradeInfo.BasicUpgradeInfo.bIsExp) {
+
+				FPlayerCharacterInfo Info = MyPlayer->GetPlayerInfo();
+				Info.BasicUpgradeInfo.mExpLevel++;
+
+				MyPlayer->SetPlayerInfo(Info);
+			}
+
+			else if (UpgradeInfo.BasicUpgradeInfo.bIsHP) {
+
+				FPlayerCharacterInfo Info = MyPlayer->GetPlayerInfo();
+				Info.BasicUpgradeInfo.mHPLevel++;
+
+				Info.HPMax *= 1.15f;
+				Info.HP = Info.HPMax;
+
+				MyPlayer->SetPlayerInfo(Info);
+			}
+
+			else if (UpgradeInfo.BasicUpgradeInfo.bIsMP) {
+
+				FPlayerCharacterInfo Info = MyPlayer->GetPlayerInfo();
+				Info.BasicUpgradeInfo.mMPLevel++;
+
+				Info.MPMax *= 1.15f;
+				Info.HP = Info.MPMax;
+
+				MyPlayer->SetPlayerInfo(Info);
+			}
+
+			else if (UpgradeInfo.BasicUpgradeInfo.bIsArmor) {
+
+				FPlayerCharacterInfo Info = MyPlayer->GetPlayerInfo();
+				Info.BasicUpgradeInfo.mArmorLevel++;
+
+				Info.ArmorPoint *= 1.2f;
+
+				MyPlayer->SetPlayerInfo(Info);
+			}
+		}
 	}
 
 

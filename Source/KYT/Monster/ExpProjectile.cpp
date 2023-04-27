@@ -113,7 +113,9 @@ void AExpProjectile::CheckCollision()
 		Particle->SetParticle(mImpactParticleSystem);
 		//Particle->SetSound(TEXT("SoundWave'/Game/Sound/Fire1.Fire1'"));
 
-		MyPlayer->GetExp(mProjectileExp);
+		float ExpScale = 1 + (MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mExpLevel * 0.1f);
+
+		MyPlayer->GetExp(mProjectileExp * ExpScale);
 
 		Destroy();
 	}

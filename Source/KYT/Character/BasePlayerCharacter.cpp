@@ -654,7 +654,27 @@ void ABasePlayerCharacter::LevelUp()
 		// 기본 능력치 강화
 		else if (Info->IsBasic) 
 		{
+			// 최대 레벨을 달성한 기본강화는 패스함
 
+			if (Info->BasicUpgradeInfo.bIsExp) {
+				if (mInfo.BasicUpgradeInfo.mExpLevel >= mInfo.BasicUpgradeInfo.mExpMaxLevel)
+					bAddUpgradeInfo = false;
+			}
+			
+			else if (Info->BasicUpgradeInfo.bIsHP) {
+				if (mInfo.BasicUpgradeInfo.mHPLevel >= mInfo.BasicUpgradeInfo.mHPMaxLevel)
+					bAddUpgradeInfo = false;
+			}
+		
+			else if (Info->BasicUpgradeInfo.bIsMP) {
+				if (mInfo.BasicUpgradeInfo.mMPLevel >= mInfo.BasicUpgradeInfo.mMPMaxLevel)
+					bAddUpgradeInfo = false;
+			}
+
+			else if (Info->BasicUpgradeInfo.bIsArmor) {
+				if (mInfo.BasicUpgradeInfo.mArmorLevel >= mInfo.BasicUpgradeInfo.mArmorMaxLevel)
+					bAddUpgradeInfo = false;
+			}
 		}
 
 
@@ -764,9 +784,11 @@ void ABasePlayerCharacter::LevelUp()
 		Skill.IncreaseValue_float = Info->IncreaseValue_float;
 		Skill.IncreaseValue_int32 = Info->IncreaseValue_int32;
 
+		Skill.IsBasic = Info->IsBasic;
 		Skill.IsAttribute = Info->IsAttribute;
 		Skill.IsProjectile = Info->IsProjectile;
 
+		Skill.BasicUpgradeInfo = Info->BasicUpgradeInfo;
 		Skill.AttributeType = Info->AttributeType;
 
 		Skill.IsProjectileHoming = Info->IsProjectileHoming;
