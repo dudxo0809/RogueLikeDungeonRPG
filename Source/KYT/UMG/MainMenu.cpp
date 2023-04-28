@@ -17,6 +17,7 @@ void UMainMenu::NativeConstruct()
 	m_ContinueBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("Continue_Btn"))));
 	m_EndGameBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("EndGame_Btn"))));
 	m_InfiniteBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("Infinite_Btn"))));
+	m_DeleteBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("DeleteSaveSlot_Btn"))));
 
 	m_SaveSlotBtnArray.Add(Cast<UButton>(GetWidgetFromName(FName(TEXT("SaveSlotBtn1")))));
 	m_SaveSlotBtnArray.Add(Cast<UButton>(GetWidgetFromName(FName(TEXT("SaveSlotBtn2")))));
@@ -37,6 +38,7 @@ void UMainMenu::NativeConstruct()
 	m_ContinueBtn->OnClicked.AddDynamic(this, &UMainMenu::OnContinueBtnClicked);
 	m_EndGameBtn->OnClicked.AddDynamic(this, &UMainMenu::OnEndGameBtnClicked);
 	m_InfiniteBtn->OnClicked.AddDynamic(this, &UMainMenu::OnInfiniteBtnClicked);
+	m_DeleteBtn->OnClicked.AddDynamic(this, &UMainMenu::OnDeleteBtnClicked);
 	
 
 
@@ -74,7 +76,9 @@ void UMainMenu::NativeConstruct()
 		}
 	}
 
+	m_DeleteBtn->SetIsEnabled(false);
 
+	bSaveBtnClicked = false;
 
 	m_SelectedSaveSlotIndex = 0;
 }
@@ -143,24 +147,102 @@ void UMainMenu::OnInfiniteBtnClicked()
 
 }
 
-void UMainMenu::SaveSlotBtnClicked(int32 Index)
+void UMainMenu::OnDeleteBtnClicked()
 {
-	m_SelectedSaveSlotIndex = Index;
+	// 세이브 슬롯이 선택되어 있을경우에만 삭제가능
+	if (!bSaveBtnClicked)
+		return;
 
-	// Font Size 25 -> 30
-	FSlateFontInfo FontInfo = m_SaveSlotTextArray[Index]->Font;
-	
+	int32 DeleteIndex = -1;
+
 	for (int32 i = 0; i < 4; i++) {
-		
-		if (i == Index)
-			FontInfo.Size = 30;
-		else
-			FontInfo.Size = 25;
 
-		m_SaveSlotTextArray[i]->SetFont(FontInfo);
+		if (m_SaveSlotBtnArray[i]->GetIsEnabled()) {
+
+			DeleteIndex = i;
+			break;
+		}
 	}
 
-	m_ContinueBtn->SetIsEnabled(true);
+	FString FullPath = FPaths::ProjectSavedDir() + TEXT("SaveGames/") + FString::FromInt(DeleteIndex) + TEXT("/Save.txt");
+
+	IFileManager& FileManager = IFileManager::Get();
+	FileManager.Delete(*FullPath);
+
+	m_SaveSlotBtnArray[DeleteIndex]->SetIsEnabled(false);
+	SaveSlotBtnClicked(DeleteIndex);
+
+}
+
+void UMainMenu::SaveSlotBtnClicked(int32 Index)
+{
+
+	// 세이브 슬롯 선택되어있을때
+	if (bSaveBtnClicked) {
+
+		for (int32 i = 0; i < 4; i++) {
+
+			// 만약 세이브 파일이 있다면 세팅
+			FString FullPath = FPaths::ProjectSavedDir() + TEXT("SaveGames/") + FString::FromInt(i) + TEXT("/Save.txt");
+
+			TSharedPtr<FArchive>	Reader = MakeShareable(IFileManager::Get().CreateFileReader(*FullPath));
+
+			// Save 파일이 존재함
+			if (Reader.IsValid()) {
+
+				FSlateFontInfo FontInfo = m_SaveSlotTextArray[Index]->Font;
+				FontInfo.Size = 25;
+
+				m_SaveSlotTextArray[i]->SetFont(FontInfo);
+
+				m_SaveSlotBtnArray[i]->SetIsEnabled(true);
+			}
+		}
+
+		m_NewGameBtn->SetIsEnabled(true);
+		m_ContinueBtn->SetIsEnabled(false);
+
+		m_DeleteBtn->SetIsEnabled(false);
+
+		bSaveBtnClicked = false;
+	}
+
+	// 처음 세이브 슬롯버튼을 클릭할때
+	else {
+
+		m_SelectedSaveSlotIndex = Index;
+
+		// Font Size 25 -> 30
+		FSlateFontInfo FontInfo = m_SaveSlotTextArray[Index]->Font;
+
+		for (int32 i = 0; i < 4; i++) {
+
+			if (i == Index) {
+
+				FontInfo.Size = 30;
+
+				m_SaveSlotBtnArray[i]->SetIsEnabled(true);
+			}
+
+			else {
+
+				FontInfo.Size = 25;
+
+				m_SaveSlotBtnArray[i]->SetIsEnabled(false);
+			}
+
+			m_SaveSlotTextArray[i]->SetFont(FontInfo);
+		}
+
+		m_NewGameBtn->SetIsEnabled(false);
+		m_ContinueBtn->SetIsEnabled(true);
+
+		m_DeleteBtn->SetIsEnabled(true);
+
+
+		bSaveBtnClicked = true;
+	}
+	
 }
 
 void UMainMenu::OnSaveSlot1BtnClicked()

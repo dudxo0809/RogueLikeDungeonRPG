@@ -25,6 +25,7 @@ private:
 	UButton* m_ContinueBtn;
 	UButton* m_EndGameBtn;
 	UButton* m_InfiniteBtn;
+	UButton* m_DeleteBtn;
 
 
 private:
@@ -35,6 +36,8 @@ private:
 private:
 
 	int32 m_SelectedSaveSlotIndex;
+
+	bool bSaveBtnClicked;
 
 
 public:
@@ -56,6 +59,9 @@ public:
 
 	UFUNCTION()
 		void OnInfiniteBtnClicked();
+
+	UFUNCTION()
+		void OnDeleteBtnClicked();
 
 
 public:
