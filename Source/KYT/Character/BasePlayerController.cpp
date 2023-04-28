@@ -39,7 +39,7 @@ void ABasePlayerController::BeginPlay()
 	PlayerCameraManagerClass = APlayerCameraManager::StaticClass();
 
 	
-	m_CameraShake = NewObject<UCameraShakeBase>(this, TEXT("CameraShake"));
+	//m_CameraShake = NewObject<UCameraShakeBase>(this, TEXT("CameraShake"));
 	m_Pattern = NewObject<USequenceCameraShakePattern>(this, TEXT("Pattern"));
 
 }
@@ -96,12 +96,13 @@ void ABasePlayerController::AttackCameraShake()
 	m_Pattern->BlendInTime = 0.2f;
 	m_Pattern->BlendOutTime = 0.4f;
 
-	m_CameraShake->SetRootShakePattern(m_Pattern);
 
-	m_CameraShakeClass = m_CameraShake->GetClass();
 
+	//m_CameraShakeClass = m_CameraShake->GetClass();
+	//UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0)->GetCameraSha
 	
-	UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0)->StartCameraShake(m_CameraShakeClass);
+	//m_CameraShake = UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0)->StartCameraShake(UCameraShakeBase::StaticClass());
 
+	//m_CameraShake->SetRootShakePattern(m_Pattern);
 
 }

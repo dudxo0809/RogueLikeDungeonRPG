@@ -215,6 +215,7 @@ void ABasePlayerCharacter::BeginPlay()
 	mInfo.SkillDataArray = Info->SkillDataArray;
 	mInfo.SkillEffect = Info->SkillEffect;
 
+
 	mNormalAttackCameraShakeSequence =
 		LoadObject<UCameraAnimationSequence>(nullptr, TEXT("CameraAnimationSequence'/Game/KYT/BluePrint/CameraShake/CAS_Player_Attack.CAS_Player_Attack'"));
 
@@ -793,6 +794,7 @@ void ABasePlayerCharacter::LevelUp()
 
 		Skill.IsProjectileHoming = Info->IsProjectileHoming;
 		Skill.IsProjectileDuplicate = Info->IsProjectileDuplicate;
+		Skill.IsProjectileDuplicateProbability = Info->IsProjectileDuplicateProbability;
 		Skill.IsProjectileDuplicateCount = Info->IsProjectileDuplicateCount;
 		Skill.IsProjectileScale = Info->IsProjectileScale;
 		Skill.IsProjectileDamageScale = Info->IsProjectileDamageScale;
