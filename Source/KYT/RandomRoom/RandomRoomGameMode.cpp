@@ -74,7 +74,12 @@ void ARandomRoomGameMode::BeginPlay()
 	if (IsValid(Sound))
 	{
 		mAudio->SetSound(Sound);
-		mAudio->SetVolumeMultiplier(0.8f);
+
+		UKYTGameInstance* Inst = Cast<UKYTGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+		float MasterVolumeScale = Inst->GetVolume().MasterVolumeScale;
+		float BGMVolumeScale = Inst->GetVolume().BGMVolumeScale * MasterVolumeScale;
+
+		mAudio->SetVolumeMultiplier(BGMVolumeScale);
 		
 		mAudio->Play();
 	}

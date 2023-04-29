@@ -34,11 +34,9 @@ AMagicianPlayerCharacter::AMagicianPlayerCharacter()
 		GetMesh()->SetAnimInstanceClass(AnimClass.Class);
 
 
-	mNormalAttackVolume = 0.5f;
-	mSkillVolume = 0.5f;
-
 	mDashCoolTime = 1.f;
 	mDashCurrentCoolTime = 0.f;
+
 
 }
 
@@ -58,6 +56,18 @@ void AMagicianPlayerCharacter::BeginPlay()
 
 	mInfo.ProjectileInfo.mProjectileDamage = mInfo.AttackPoint;
 	
+
+	// Sound
+
+	UKYTGameInstance* Inst = Cast<UKYTGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	float MasterVolumeScale = Inst->GetVolume().MasterVolumeScale;
+
+	float SkillVolumeScale = Inst->GetVolume().SkillVolumeScale * MasterVolumeScale;
+	float AttackVolumeScale = Inst->GetVolume().AttackVolumeScale * MasterVolumeScale;
+
+	mSkillVolume = SkillVolumeScale;
+	mNormalAttackVolume = AttackVolumeScale;
+
 }
 
 void AMagicianPlayerCharacter::Tick(float DeltaTime)
@@ -524,7 +534,7 @@ void AMagicianPlayerCharacter::Dash()
 
 	Particle->SetParticle(TEXT("ParticleSystem'/Game/ParagonPhase/FX/Particles/Abilities/Ultimate/FX/P_PhaseUltEnd.P_PhaseUltEnd'"));
 	Particle->SetSound(TEXT("SoundWave'/Game/UltimateMagicUE/wav/Buffs/Buff_-_Simple_Shimmer_2.Buff_-_Simple_Shimmer_2'"));
-	Particle->SetSoundVolumeScale(0.5f);
+	Particle->SetSoundVolumeScale(mSkillVolume);
 
 	Particle->SetActorScale3D(FVector(2.f, 2.f, 2.f));
 

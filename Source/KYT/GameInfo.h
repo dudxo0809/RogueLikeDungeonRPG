@@ -58,6 +58,30 @@ enum class EPlayerAttribute : uint8 {
 };
 
 
+USTRUCT(BlueprintType)
+struct FVolumeScale {
+
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		float MasterVolumeScale;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		float BGMVolumeScale;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		float SkillVolumeScale;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		float AttackVolumeScale;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		float MonsterVolumeScale;
+
+};
+
 
 
 

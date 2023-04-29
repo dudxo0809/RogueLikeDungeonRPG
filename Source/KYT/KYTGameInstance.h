@@ -36,6 +36,26 @@ private:
 
 	int32 m_CurrentSaveIndex;
 
+private:
+
+	FVolumeScale m_VolumeScale;
+
+
+public:
+
+	UFUNCTION(BlueprintCallable)
+	void SetVolume(FVolumeScale VolumeScale) {
+
+		m_VolumeScale = VolumeScale;
+	}
+
+	UFUNCTION(BlueprintCallable)
+	FVolumeScale GetVolume() {
+
+		return m_VolumeScale;
+	}
+
+
 public:
 
 	int32 GetCurrentSaveIndex() {

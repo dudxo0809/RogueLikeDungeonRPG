@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 
+#include "Setting.h"
+
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 
@@ -25,7 +27,12 @@ private:
 	UButton* m_ContinueBtn;
 	UButton* m_EndGameBtn;
 	UButton* m_InfiniteBtn;
+	UButton* m_SettingBtn;
 	UButton* m_DeleteBtn;
+
+private:
+
+	USetting* m_Setting;
 
 
 private:
@@ -59,6 +66,9 @@ public:
 
 	UFUNCTION()
 		void OnInfiniteBtnClicked();
+
+	UFUNCTION()
+		void OnSettingBtnClicked();
 
 	UFUNCTION()
 		void OnDeleteBtnClicked();

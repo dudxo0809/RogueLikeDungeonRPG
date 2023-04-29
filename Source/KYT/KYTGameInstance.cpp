@@ -24,6 +24,16 @@ UKYTGameInstance::UKYTGameInstance() :
 	if (MonsterTable.Succeeded())
 		m_MonsterTable = MonsterTable.Object;
 
+
+	// Default Volume Scale
+	FVolumeScale Volume;
+	Volume.MasterVolumeScale = 0.6f;
+	Volume.BGMVolumeScale = 0.4f;
+	Volume.AttackVolumeScale = 0.5f;
+	Volume.SkillVolumeScale = 0.3f;
+	Volume.MonsterVolumeScale = 0.4f;
+
+	m_VolumeScale = Volume;
 }
 
 

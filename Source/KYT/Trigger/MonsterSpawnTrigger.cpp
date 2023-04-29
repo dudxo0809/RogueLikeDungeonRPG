@@ -5,6 +5,7 @@
 
 #include "../Character/BasePlayerCharacter.h"
 
+#include "../KYTGameInstance.h"
 #include "../KYTGameModeBase.h"
 #include "../RandomRoom/RandomRoomGameMode.h"
 
@@ -76,12 +77,19 @@ void AMonsterSpawnTrigger::TriggerBegin(const FHitResult& SweepResult, AActor* O
 	MonsterCount = (MonsterCount <= MaxSpawncount ? MonsterCount : MaxSpawncount);
 
 	// Audio
+	UKYTGameInstance* Inst = Cast<UKYTGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+
+	float MasterVolumeScale = Inst->GetVolume().MasterVolumeScale;
+	float MonsterVolumeScale = Inst->GetVolume().MonsterVolumeScale * MasterVolumeScale;
+
+
 	UAudioComponent* mAudio = NewObject<UAudioComponent>(this, TEXT("Audio"));
 
 	USoundBase* SpawnSound = LoadObject<USoundBase>(nullptr, TEXT("SoundWave'/Game/UltimateMagicUE/wav/Classic_Spawn_SFX/Classic_Spawn__6_.Classic_Spawn__6_'"));
 	mAudio->SetSound(SpawnSound);
-	mAudio->SetVolumeMultiplier(0.6f);
+	mAudio->SetVolumeMultiplier(MonsterVolumeScale);
 	mAudio->Play();
+
 
 	for (int32 i = 0; i < MonsterCount; i++) {
 

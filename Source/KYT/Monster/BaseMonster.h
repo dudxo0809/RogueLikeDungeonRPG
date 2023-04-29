@@ -72,6 +72,10 @@ private:
 protected:
 
 	float mAttackLocationDist;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+		float  mMonsterAttackVolume = 0.6f;
 	
 
 protected:

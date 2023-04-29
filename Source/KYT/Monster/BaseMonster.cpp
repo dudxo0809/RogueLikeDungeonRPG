@@ -145,6 +145,13 @@ void ABaseMonster::BeginPlay()
 	
 	// sound
 	mNormalAttackSoundPath = TEXT("SoundWave'/Game/UltimateMagicUE/wav/Buffs/Buff_24.Buff_24'");
+
+	UKYTGameInstance* Inst = Cast<UKYTGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	float MasterVolumeScale = Inst->GetVolume().MasterVolumeScale;
+
+	float MonsterVolumeScale = Inst->GetVolume().MonsterVolumeScale * MasterVolumeScale;
+
+	mMonsterAttackVolume = MonsterVolumeScale;
 }
 
 void ABaseMonster::Tick(float DeltaTime)

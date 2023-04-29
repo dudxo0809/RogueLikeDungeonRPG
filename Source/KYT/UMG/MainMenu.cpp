@@ -11,12 +11,13 @@ void UMainMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-
+	m_Setting = Cast<USetting>(GetWidgetFromName(FName(TEXT("UI_Setting"))));
 
 	m_NewGameBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("NewGame_Btn"))));
 	m_ContinueBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("Continue_Btn"))));
 	m_EndGameBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("EndGame_Btn"))));
 	m_InfiniteBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("Infinite_Btn"))));
+	m_SettingBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("Setting_Btn"))));
 	m_DeleteBtn = Cast<UButton>(GetWidgetFromName(FName(TEXT("DeleteSaveSlot_Btn"))));
 
 	m_SaveSlotBtnArray.Add(Cast<UButton>(GetWidgetFromName(FName(TEXT("SaveSlotBtn1")))));
@@ -38,6 +39,7 @@ void UMainMenu::NativeConstruct()
 	m_ContinueBtn->OnClicked.AddDynamic(this, &UMainMenu::OnContinueBtnClicked);
 	m_EndGameBtn->OnClicked.AddDynamic(this, &UMainMenu::OnEndGameBtnClicked);
 	m_InfiniteBtn->OnClicked.AddDynamic(this, &UMainMenu::OnInfiniteBtnClicked);
+	m_SettingBtn->OnClicked.AddDynamic(this, &UMainMenu::OnSettingBtnClicked);
 	m_DeleteBtn->OnClicked.AddDynamic(this, &UMainMenu::OnDeleteBtnClicked);
 	
 
@@ -81,6 +83,8 @@ void UMainMenu::NativeConstruct()
 	bSaveBtnClicked = false;
 
 	m_SelectedSaveSlotIndex = 0;
+
+	m_Setting->SetVisibility(ESlateVisibility::Hidden);
 }
 
 
@@ -144,6 +148,14 @@ void UMainMenu::OnInfiniteBtnClicked()
 		// Open Level
 		UGameplayStatics::OpenLevel(GetWorld(), TEXT("Infinite"));
 	}
+
+}
+
+void UMainMenu::OnSettingBtnClicked()
+{
+	// 환경설정창 열기
+
+	m_Setting->SetVisibility(ESlateVisibility::Visible);
 
 }
 
