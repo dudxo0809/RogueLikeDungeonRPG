@@ -19,6 +19,8 @@
 #include "../Monster/MonsterSuperDawn.h"
 #include "../Monster/MonsterSuperDusk.h"
 
+#include "../Monster/MonsterDino.h"
+
 #include "../Monster/BossMonsterRampage.h"
 
 
@@ -31,16 +33,26 @@ AMonsterSpawnTrigger::AMonsterSpawnTrigger()
 	mRoom = nullptr;
 
 	mStageNum = 1;
-//
-	//GetClass()
+
+
+	// Random Monster Spawn
+	// 0.05% -> Dino Spawn
 	
-	mMonsterClassArray.Add(AMonsterMeleeDawn::StaticClass());
-	mMonsterClassArray.Add(AMonsterSuperDawn::StaticClass());
+	int32 RandomNum = FMath::RandRange(0, 10000);
 
-	mMonsterClassArray.Add(AMonsterMeleeDusk::StaticClass());
-	mMonsterClassArray.Add(AMonsterSuperDusk::StaticClass());
+	if (RandomNum <= 5) {
 
-//	mMonsterClassArray.Add(ABossMonsterRampage::StaticClass());
+		// Easter Egg
+		mMonsterClassArray.Add(AMonsterDino::StaticClass());
+	}
+	else {
+
+		mMonsterClassArray.Add(AMonsterMeleeDawn::StaticClass());
+		mMonsterClassArray.Add(AMonsterSuperDawn::StaticClass());
+
+		mMonsterClassArray.Add(AMonsterMeleeDusk::StaticClass());
+		mMonsterClassArray.Add(AMonsterSuperDusk::StaticClass());
+	}
 
 	ARandomRoomGameMode* MyGameMode = Cast<ARandomRoomGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 	if (IsValid(MyGameMode)) {
