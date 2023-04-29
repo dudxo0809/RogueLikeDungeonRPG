@@ -300,7 +300,7 @@ void UPlayerLevelUp::OnOkBtnClicked()
 				Info.BasicUpgradeInfo.mMPLevel++;
 
 				Info.MPMax *= 1.15f;
-				Info.HP = Info.MPMax;
+				Info.MP = Info.MPMax;
 
 				MyPlayer->SetPlayerInfo(Info);
 			}
