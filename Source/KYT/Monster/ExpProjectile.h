@@ -39,6 +39,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		FString  mImpactParticlePath;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 	UNiagaraSystem* mImpactParticleSystem;
 
 

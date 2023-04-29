@@ -110,8 +110,11 @@ void AExpProjectile::CheckCollision()
 				GetActorRotation(),
 				SpawnParam);
 
-		Particle->SetParticle(mImpactParticleSystem);
-		//Particle->SetSound(TEXT("SoundWave'/Game/Sound/Fire1.Fire1'"));
+		if (Particle && IsValid(Particle))
+		{
+			Particle->SetParticle(mImpactParticleSystem);
+			//Particle->SetSound(TEXT("SoundWave'/Game/Sound/Fire1.Fire1'"));
+		}
 
 		float ExpScale = 1 + (MyPlayer->GetPlayerInfo().BasicUpgradeInfo.mExpLevel * 0.1f);
 
