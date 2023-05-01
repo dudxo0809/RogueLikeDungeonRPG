@@ -1,6 +1,4 @@
 RogueLike Dungeon RPG
-<br/>
-
 ========================
 <br/>
 
