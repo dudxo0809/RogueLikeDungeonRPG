@@ -31,8 +31,6 @@ RogueLike Dungeon RPG
 * 스킬 : 1, 2, 3, 4 키
 * 플레이어 상태창 : Tab 키
 <br/>
-<br/>
-<br/>
 
 # 기술 스택
 * Unreal Engine 5.0
@@ -53,11 +51,13 @@ RogueLike Dungeon RPG
 # 데모 영상  
 Link: <https://youtu.be/Mv7Js-H_1Fs>
 <br/>
+<br/>
 
 # 데모 게임  
 Link: <https://drive.google.com/drive/folders/1hdFNzMMcoeUXZYR0jCBAGlrTzEqohP5N?usp=sharing>
 <br/>
+<br/>
 
 # 저작권 및 라이선스
 <br/>
-
+<br/>
