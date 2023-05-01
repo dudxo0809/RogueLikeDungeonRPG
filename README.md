@@ -3,7 +3,7 @@ RogueLike Dungeon RPG
 <br/>
 
 # 개요
-* 'Unreal Engine 5' 기반으로 제작한 게임 프로젝트 입니다.
+* Unreal Engine 5을 기반으로 제작한 게임 프로젝트 입니다.
 <br/>
 
 ## 프로젝트 이름
