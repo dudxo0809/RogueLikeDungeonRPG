@@ -4,12 +4,12 @@ RogueLike Dungeon RPG
 # 프로젝트 개요
 
 * 프로젝트 이름: RogueLike Dungeon RPG   
-* 개발기간     : 3주 (21일)  
-* 
+* 개발기간     : 3주 (21일)
+<br/>
 * 프로젝트 기능:  
-
-  
-  
+<br/>
+<br/>
+<br/>
 # 프로젝트 설명
   
   
@@ -17,11 +17,10 @@ RogueLike Dungeon RPG
 # 기술 스택
   
 * Unreal Engine 5.0
-* C++  
-  
-    
-      
-      
+* C++
+<br/>
+<br/>
+<br/>
 # 주요 기능
   
   
