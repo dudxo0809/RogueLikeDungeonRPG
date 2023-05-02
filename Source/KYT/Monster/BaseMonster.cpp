@@ -73,18 +73,18 @@ void ABaseMonster::BeginPlay()
 
 		mStageNum = MyGameMode->GetStageNumber();
 	}
-	float MonsterAbilityScale = 1 + (0.5 * (mStageNum - 1));
 
 
 	if (TableInfo)
 	{
 		// Set Monster Level first
-		int32 LevelOffset = FMath::RandRange(0, 3);
+		int32 LevelOffset = FMath::RandRange(mStageNum - 1, mStageNum * 2);
 
-		mInfo.Level = TableInfo->Level * MonsterAbilityScale + LevelOffset;
+		mInfo.Level = (mStageNum - 1) + TableInfo->Level + LevelOffset;
 
 		// Set Monster Ability based on Monster Level
-		MonsterAbilityScale += 0.3 * mInfo.Level;
+
+		float MonsterAbilityScale = 1 + (0.5 * (mInfo.Level - 1));
 
 		mInfo.Name = TableInfo->Name;
 		mInfo.AttackPoint = TableInfo->AttackPoint * MonsterAbilityScale;
