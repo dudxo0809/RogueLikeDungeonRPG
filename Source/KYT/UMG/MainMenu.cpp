@@ -84,6 +84,8 @@ void UMainMenu::NativeConstruct()
 
 	m_SelectedSaveSlotIndex = 0;
 
+	m_InfiniteBtn->SetIsEnabled(false);
+
 	m_Setting->SetVisibility(ESlateVisibility::Hidden);
 }
 
