@@ -211,10 +211,10 @@ void AProjectile::CheckCollision() {
 
 			if (mDuplicate) {
 
-				float Probability = Magician->GetPlayerInfo().ProjectileInfo.mDuplicateProbability;
+				//float Probability = Magician->GetPlayerInfo().ProjectileInfo.mDuplicateProbability;
 				float PickNum = FMath::RandRange(0.f, 100.f);
 
-				if (PickNum <= Probability) {
+				if (PickNum <= mDuplicateProbability) {
 
 					DuplicateProjectile(Monster, mDuplicateCount, 200, mDuplicateSpeed);
 				}

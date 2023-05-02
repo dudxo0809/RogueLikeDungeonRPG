@@ -73,6 +73,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 		float	 mProjectileDuplicateDamage;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+	float mDuplicateProbability;
+
 
 	UNiagaraSystem* mImpactParticleSystem;
 
@@ -157,6 +160,11 @@ public:
 	void SetProjectileDuplicateDamage(float Damage) {
 
 		mProjectileDuplicateDamage = Damage;
+	}
+
+	void SetProjectileDuplicateProbability(float Probability) {
+
+		mDuplicateProbability = Probability;
 	}
 
 

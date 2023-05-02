@@ -125,6 +125,7 @@ void AMagicianPlayerCharacter::NormalAttackEffect(int32 ComboCount)
 	Projectile->SetHoming(mInfo.ProjectileInfo.mHoming);
 	Projectile->SetDuplicate(mInfo.ProjectileInfo.mDuplicate);
 	Projectile->SetDuplicateCount(mInfo.ProjectileInfo.mDuplicateCount);
+	Projectile->SetProjectileDuplicateProbability(mInfo.ProjectileInfo.mDuplicateProbability);
 
 	Projectile->SetDamage(mInfo.ProjectileInfo.mProjectileDamage * mInfo.ProjectileInfo.mProjectileDamageScale);
 	Projectile->SetProjectileDuplicateDamage(mInfo.ProjectileInfo.mProjectileDamage * mInfo.ProjectileInfo.mProjectileDamageScale * 0.5f);
@@ -198,6 +199,7 @@ void AMagicianPlayerCharacter::UseSkill(int32 SkillNumber)
 
 			Projectile->SetHoming(mInfo.ProjectileInfo.mHoming);
 			Projectile->SetDuplicate(mInfo.ProjectileInfo.mDuplicate);
+			Projectile->SetProjectileDuplicateProbability(mInfo.ProjectileInfo.mDuplicateProbability);
 
 			Projectile->SetDamage(mInfo.ProjectileInfo.mProjectileDamage * mInfo.ProjectileInfo.mProjectileDamageScale * 1.0f);
 			Projectile->SetProjectileDuplicateDamage(mInfo.ProjectileInfo.mProjectileDamage * mInfo.ProjectileInfo.mProjectileDamageScale * 0.2f);
@@ -278,6 +280,7 @@ void AMagicianPlayerCharacter::UseSkill(int32 SkillNumber)
 			Projectile->SetDuplicate(mInfo.ProjectileInfo.mDuplicate);
 
 			Projectile->SetDuplicateCount(mInfo.ProjectileInfo.mDuplicateCount/2);
+			Projectile->SetProjectileDuplicateProbability(mInfo.ProjectileInfo.mDuplicateProbability);
 
 
 			Projectile->SetSpeed(mInfo.ProjectileInfo.mProjectileSpeed * 0.6f);
@@ -352,6 +355,7 @@ void AMagicianPlayerCharacter::UseSkill(int32 SkillNumber)
 
 		Projectile->SetHoming(mInfo.ProjectileInfo.mHoming);
 		Projectile->SetDuplicate(true);
+		Projectile->SetProjectileDuplicateProbability(100.f);
 
 		Projectile->SetDamage(mInfo.ProjectileInfo.mProjectileDamage* mInfo.ProjectileInfo.mProjectileDamageScale * 5.f);
 		Projectile->SetProjectileDuplicateDamage(mInfo.ProjectileInfo.mProjectileDamage* mInfo.ProjectileInfo.mProjectileDamageScale * 0.2f);
