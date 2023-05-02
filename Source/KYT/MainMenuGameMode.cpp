@@ -30,6 +30,8 @@ void AMainMenuGameMode::BeginPlay()
 	
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(UIOnly);
 
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetShowMouseCursor(true);
+
 
 	// Sound
 	USoundBase* Sound = LoadObject<USoundBase>(nullptr, TEXT("SoundWave'/Game/RPG_Dungeon_Themes/WAVs/Dungeon_8_Where_Art_Thou/WAV_Where_Art_Thou_Version_01_LOOP.WAV_Where_Art_Thou_Version_01_LOOP'"));
